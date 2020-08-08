@@ -44,12 +44,17 @@ dataChanged(event){
 }
 
 onAudioPlay(type){
-    if(type === 'success')
+    if(type === 'success'){
+        this.audioSuccess.nativeElement.currentTime = 0;
         this.audioSuccess.nativeElement.play();
-    else
+        if (this.audioSuccess.nativeElement.currentTime > 1) {
+           this.audioSuccess.nativeElement.pause();
+        }
+    }
+    else {
         this.audioError.nativeElement.play();
-  }
-
+    }
+}
 clearAll (){
      this.successFlat = null;
      this.errorFlat = null;
@@ -74,7 +79,7 @@ compareTwo(a, b){
            this.onAudioPlay("error");
            this.errorFlat = true;
            this.successFlat = false;
-        }
+       }
 
-    }
+}
 }
