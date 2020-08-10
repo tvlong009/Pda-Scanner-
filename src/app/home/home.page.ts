@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild, Injectable, Inject} from '@angular/core';
 import {Barcode} from '../model/barcode';
 import {HomeService} from './home.service';
+import { Platform } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -14,22 +16,21 @@ export class HomePage implements OnInit {
   barcodeTempIn: any;
   successFlat: Boolean;
   errorFlat: Boolean;
+  audioOk: any;
+  audioError: any;
   @ViewChild("boxBarcode") boxElement: any;
   @ViewChild("form") form: any;
   @ViewChild("plasticBarcode") plasticElement: any;
-  @ViewChild('audioSuccess') audioSuccess: any;
-  @ViewChild('audioError') audioError: any;
 
-  constructor(private homeService: HomeService) {
+  constructor(private homeService: HomeService, private platform: Platform) {
      this.barCode = {
        box:'',
        plastic: ''
      }
   }
-  ngOnInit(){
-  }
+  ngOnInit(){}
 
-  compareBarcode(event, barCode, barCodeElement) {
+ compareBarcode(event, barCode, barCodeElement) {
        if(this.barCode.box || this.barCode.plastic){
           this.barcodeTempOut = this.homeService.returnBarcodeInput(event, barCode, barCodeElement);
        } else {
@@ -45,16 +46,15 @@ dataChanged(event){
 
 onAudioPlay(type){
     if(type === 'success'){
-        this.audioSuccess.nativeElement.currentTime = 0;
-        this.audioSuccess.nativeElement.play();
-        if (this.audioSuccess.nativeElement.currentTime > 1) {
-           this.audioSuccess.nativeElement.pause();
-        }
+        this.homeService.preload("success", 'assets/sound/successSound.mp3');
+        this.homeService.play("success");
     }
     else {
-        this.audioError.nativeElement.play();
+        this.homeService.preload("error", 'assets/sound/errorSound.mp3');
+        this.homeService.play("error");
     }
 }
+
 clearAll (){
      this.successFlat = null;
      this.errorFlat = null;

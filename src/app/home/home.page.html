@@ -7,7 +7,6 @@
 <ion-content [fullscreen]="true">
 
     <ion-card>
-      <ion-card-header>
         <ion-row>
           <ion-col size="8">
             <div *ngIf="successFlat"><ion-button expand="full" color="success">OK</ion-button></div>
@@ -17,7 +16,6 @@
             <button class="customButton" (click)="clearAll()" >Clear</button>
           </ion-col>
         </ion-row>
-      </ion-card-header>
 
       <form #form="ngForm" novalidate>
       <ion-card-content>
@@ -44,11 +42,3 @@
     </ion-card>
 
 </ion-content>
-
-<audio #audioSuccess>
-  <source src='assets/sound/successSound.mp3' type="audio/mp3">
-</audio>
-
-<audio #audioError>
-  <source src='assets/sound/errorSound.mp3' type="audio/mp3">
-</audio>
