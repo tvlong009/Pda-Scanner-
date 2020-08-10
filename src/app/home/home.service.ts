@@ -18,7 +18,6 @@ export class HomeService {
       }
   }
 
-
   returnBarcodeInput(event, barCode, barCodeElement){
         // Init Data
         if(barCode === ""){
