@@ -11,6 +11,7 @@
           <ion-col size="8">
             <div *ngIf="successFlat"><ion-button expand="full" color="success">OK</ion-button></div>
             <div *ngIf="errorFlat"><ion-button expand="full" color="danger">NG</ion-button></div>
+            <div *ngIf="errorBCode"><ion-button expand="full" color="danger">B.Code Error</ion-button></div>
           </ion-col>
           <ion-col size="4">
             <button class="customButton" (click)="clearAll()" >Clear</button>

@@ -14,10 +14,9 @@ export class HomePage implements OnInit {
   barCode: Barcode;
   barcodeTempOut: any;
   barcodeTempIn: any;
-  successFlat: Boolean;
-  errorFlat: Boolean;
-  audioOk: any;
-  audioError: any;
+  successFlat: Boolean = false;
+  errorFlat: Boolean = false;
+  errorBCode: Boolean = false;
   @ViewChild("boxBarcode") boxElement: any;
   @ViewChild("form") form: any;
   @ViewChild("plasticBarcode") plasticElement: any;
@@ -39,7 +38,7 @@ export class HomePage implements OnInit {
        } else {
           this.barcodeTempOut = event;
        }
-       this.compareTwo(this.cutBarCode(this.barcodeTempOut), this.cutBarCode(this.barcodeTempIn));
+       this.compareTwo(this.barcodeTempOut, this.barcodeTempIn);
   }
 
 dataChanged(event){
@@ -60,15 +59,15 @@ cutBarCode(barcode){
     if(barcode){
       var partNo = barcode.substring(0, 7);
       var model = barcode.substring(27, 34);
-
-     return partNo + model;
-}
-return 0;
+      return partNo + model;
+    }
+  return 0;
 }
 
 clearAll (){
-     this.successFlat = null;
-     this.errorFlat = null;
+     this.successFlat = false;
+     this.errorFlat = false;
+     this.errorBCode = false;
      this.barCode.box = '';
      this.barCode.plastic = '';
      this.barcodeTempIn = '';
@@ -82,15 +81,23 @@ clearAll (){
 }
 
 compareTwo(a, b){
-     if(a === b){
-          this.onAudioPlay("success");
-          this.successFlat = true;
+    if(a.length >= 34 && b.length >= 34)
+         if(this.cutBarCode(a) === this.cutBarCode(b)){
+              this.onAudioPlay("success");
+              this.successFlat = true;
+              this.errorFlat = false;
+              this.errorBCode = false;
+         } else {
+               this.onAudioPlay("error");
+               this.errorFlat = true;
+               this.successFlat = false;
+               this.errorBCode = false;
+           }
+    else {
+          this.onAudioPlay("error");
           this.errorFlat = false;
-     } else {
-           this.onAudioPlay("error");
-           this.errorFlat = true;
-           this.successFlat = false;
-       }
-
+          this.successFlat = false;
+          this.errorBCode = true;
+    }
 }
 }
