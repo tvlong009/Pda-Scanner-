@@ -28,7 +28,10 @@ export class HomePage implements OnInit {
        plastic: ''
      }
   }
-  ngOnInit(){}
+  ngOnInit(){
+    this.homeService.preload("success", 'assets/sound/successSound.mp3');
+    this.homeService.preload("error", 'assets/sound/errorSound.mp3');
+  }
 
  compareBarcode(event, barCode, barCodeElement) {
        if(this.barCode.box || this.barCode.plastic){
@@ -36,7 +39,7 @@ export class HomePage implements OnInit {
        } else {
           this.barcodeTempOut = event;
        }
-       this.compareTwo(this.barcodeTempOut, this.barcodeTempIn);
+       this.compareTwo(this.cutBarCode(this.barcodeTempOut), this.cutBarCode(this.barcodeTempIn));
   }
 
 dataChanged(event){
@@ -46,13 +49,21 @@ dataChanged(event){
 
 onAudioPlay(type){
     if(type === 'success'){
-        this.homeService.preload("success", 'assets/sound/successSound.mp3');
         this.homeService.play("success");
     }
     else {
-        this.homeService.preload("error", 'assets/sound/errorSound.mp3');
         this.homeService.play("error");
     }
+}
+
+cutBarCode(barcode){
+    if(barcode){
+      var partNo = barcode.substring(0, 7);
+      var model = barcode.substring(27, 34);
+
+     return partNo + model;
+}
+return 0;
 }
 
 clearAll (){
