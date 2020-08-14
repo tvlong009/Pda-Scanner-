@@ -25,6 +25,7 @@
           <ion-input #boxBarcode
                      autofocus="true"
                      name="box" required
+                     (ionFocus)="hideKeyboard()"
                      (ngModelChange)="dataChanged($event)"
                      [(ngModel)]="barCode.box"
                      type="text"></ion-input>
@@ -33,6 +34,7 @@
           <ion-label position="floating">Barcode on plastic</ion-label>
           <ion-input #plasticBarcode
                      name="plastic" required
+                     (ionFocus)="hideKeyboard()"
                      (ngModelChange)="compareBarcode($event, barCode.plastic, plasticElement)"
                      [(ngModel)]="barCode.plastic"
                      type="text"></ion-input>

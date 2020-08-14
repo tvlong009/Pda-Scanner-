@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { Media } from '@ionic-native/media/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -18,6 +20,7 @@ import { Media } from '@ionic-native/media/ngx';
     SplashScreen,
     NativeAudio,
     Media,
+    Keyboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
