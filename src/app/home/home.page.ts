@@ -75,13 +75,13 @@ export class HomePage implements OnInit {
     this.onAudioPlay("success");
     setTimeout(() => {
       this.form.reset();
-    }, 200);
+    }, 100);
     setTimeout(() => {
       this.boxElement.setFocus();
-    }, 400);
+    }, 200);
        setTimeout(() => {
           this.keyboard.hide();
-        }, 500);
+        }, 300);
   }
 
     compareTwo(a, b){
@@ -110,8 +110,7 @@ export class HomePage implements OnInit {
   hideKeyboard(){
      setTimeout(() => {
           this.keyboard.hide();
-      }, 500);
-
+      }, 300);
   }
 }
 
